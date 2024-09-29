@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  heavy_thought_lifters:
+    container_name: nginx
+    build: docker/
+    volumes:
+      - ./:/var/www/html/site
+    ports:
+      - "80:80"

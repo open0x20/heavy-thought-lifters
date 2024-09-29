@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: heavy-thought-lifters
+            description: API documentation for heavy-thought-lifters
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^(?!.*(doc|_error))

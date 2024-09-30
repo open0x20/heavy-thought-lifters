@@ -4,7 +4,7 @@ namespace App\Api\Login;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ApiLoginCredentialsLoginRequest
+class RequestDtoCredentialsLogin
 {
     #[Assert\NotBlank]
     #[Assert\NotNull]

@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Api\Login\ApiLoginCredentialsLoginRequest;
-use App\Api\Login\ApiLoginCredentialsLoginResponse;
+use App\Api\Login\RequestDtoCredentialsLogin;
+use App\Api\Login\ResponseDtoCredentialsLogin;
 use App\Exception\ValidationException;
+use App\Model\LoginModel;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,17 +22,17 @@ class LoginController extends AbstractController
      */
     #[Route('/login', name: 'app_login', methods: ['POST'])]
     #[OA\RequestBody(
-        content: new Model(type: ApiLoginCredentialsLoginRequest::class)
+        content: new Model(type: RequestDtoCredentialsLogin::class)
     )]
     #[OA\Response(
         response: 200,
         description: 'Authenticates a user with valid credentials',
-        content: new Model(type: ApiLoginCredentialsLoginResponse::class)
+        content: new Model(type: ResponseDtoCredentialsLogin::class)
     )]
-    public function login(Request $request, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function login(Request $request, SerializerInterface $serializer, ValidatorInterface $validator, LoginModel $loginModel): JsonResponse
     {
         // Deserialize the payload
-        $requestDto = $serializer->deserialize($request->getContent(), ApiLoginCredentialsLoginRequest::class, 'json');
+        $requestDto = $serializer->deserialize($request->getContent(), RequestDtoCredentialsLogin::class, 'json');
 
         // Validate the resulting dto
         $violations = $validator->validate($requestDto);
@@ -40,16 +41,9 @@ class LoginController extends AbstractController
         }
 
         // Processing
-        //$data = TrackModel::create($addDto);
+        $response = $loginModel->login($requestDto);
 
         // Response
-        //return DtoHelper::createResponseDto(Response::HTTP_OK, $data, []);
-
-        //$request->getContent();
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/LoginController.php',
-            'request' => $requestDto,
-        ]);
+        return $this->json($response, $response->status, $response->headers);
     }
 }

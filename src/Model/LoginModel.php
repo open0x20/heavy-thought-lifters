@@ -23,7 +23,7 @@ class LoginModel
             return new ResponseDtoCredentialsLogin('Login failed', 400);
         }
 
-        if (password_hash($dto->password, PASSWORD_DEFAULT) === $customer->getPassword()) {
+        if (password_verify($dto->password, $customer->getPassword())) {
             return new ResponseDtoCredentialsLogin('Login successful', 200);
         }
 

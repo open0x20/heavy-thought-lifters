@@ -11,6 +11,8 @@ RUN apt install libonig-dev libsqlite3-dev libmagickwand-dev -y
 
 # PHP Extensions installieren
 RUN docker-php-ext-install mbstring pdo pdo_sqlite pdo_mysql
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 #RUN pecl install imagick
 #RUN docker-php-fpm-ext-enable imagick
 

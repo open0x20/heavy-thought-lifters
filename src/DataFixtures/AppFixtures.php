@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 
         $customer = new Customer();
         $customer->setEmail('customer1@test.com');
-        $customer->setPassword(password_hash('test', PASSWORD_DEFAULT));
+        $customer->setPassword(password_hash('testtest', PASSWORD_DEFAULT));
         $customer->setLoginTypeId(0);
         $customer->setLastLogin(new \DateTime());
         $manager->persist($customer);

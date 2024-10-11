@@ -4,7 +4,7 @@ namespace App\Api\Login;
 
 use App\Dto\AbstractResponse;
 
-class ResponseDtoCredentialsLogin extends AbstractResponse
+class ResponseDtoCredentialsRegister extends AbstractResponse
 {
     public string $message;
 

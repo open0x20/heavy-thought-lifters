@@ -8,3 +8,7 @@ services:
       - ./:/var/www/html/site
     ports:
       - "80:80"
+    environment:
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
+      PHP_IDE_CONFIG: serverName=PHPSERVER
